@@ -43,13 +43,14 @@ pipeline {
             } 
         }
     }
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Please check the logs.'
-        }
+        post {
+    always {
+        bat 'taskkill /F /IM python.exe /T || exit 0'
+    }
+    failure {
+        echo 'Pipeline failed. Please check the logs.'
+    }
+    
     }
 }
 
