@@ -23,15 +23,15 @@ pipeline {
         }
         stage('Docker Login') {
             steps {
-                  bat 'docker login -u deepika200 -p Deepu@2006'
+                  bat 'docker login -u vaddeusha -p Hima@2789'
                 }
             }
         stage('push Docker Image to Docker Hub') {
             steps {
                 echo "push Docker Image to Docker Hub"
-                bat "docker tag seleniumdemoapp:v1 deepika200/sample2026:seleniumtestimage"               
+                bat "docker tag seleniumdemoapp:v1 vaddeusha/sample2026:seleniumtestimage"               
                     
-                bat "docker push deepika200/sample2026:seleniumtestimage"
+                bat "docker push vaddeusha/sample2026:seleniumtestimage"
                 
             }
         }
@@ -43,14 +43,12 @@ pipeline {
             } 
         }
     }
-        post {
-    always {
-        bat 'taskkill /F /IM python.exe /T || exit 0'
-    }
-    failure {
-        echo 'Pipeline failed. Please check the logs.'
-    }
-    
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Please check the logs.'
+        }
     }
 }
-
